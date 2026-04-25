@@ -1,25 +1,25 @@
 # Developer Productivity MVP – Checklist
 
 ## Phase 1: Problem Understanding
-- [ ] Read and understood assignment requirements
-- [ ] Identified core problem: metrics lack interpretation
-- [ ] Understood all required metrics
-- [ ] Defined scope: individual developer (IC view)
+- [*] Read and understood assignment requirements
+- [*] Identified core problem: metrics lack interpretation
+- [*] Understood all required metrics
+- [*] Defined scope: individual developer (IC view)
 
 ---
 
 ## Phase 2: Data Understanding
-- [ ] Opened Excel dataset
-- [ ] Identified all relevant sheets
-- [ ] Mapped sheets to required metrics
-- [ ] Selected necessary fields for processing
+- [*] Opened Excel dataset
+- [*] Identified all relevant sheets
+- [*] Mapped sheets to required metrics
+- [*] Selected necessary fields for processing
 
 ---
 
 ## Phase 3: Backend Setup
-- [ ] Setup FastAPI project
-- [ ] Installed required dependencies
-- [ ] Verified API server is running
+- [*] Setup FastAPI project
+- [*] Installed required dependencies
+- [*] Verified API server is running
 
 ---
 
