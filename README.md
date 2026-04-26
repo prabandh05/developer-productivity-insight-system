@@ -184,7 +184,7 @@ Refer to CHECKLIST.md for detailed execution steps and progress tracking.
 
 ## Demo
 
-Demo video link: (to be added)
+Demo video link: [Demo Video](https://drive.google.com/file/d/1lpjtGmKhxd0fbdcy2d04TP8p4fNDtj74/view?usp=sharing)
 
 ---
 
