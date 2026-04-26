@@ -1,6 +1,18 @@
 import pandas as pd
+import math 
 
-# Pre process to convert date columns to datetime format
+# Finding sheet with multiple keywords
+def get_sheet_by_keywords(data, keywords):
+    for name, df in data.items():
+        name_lower = name.lower()
+
+        if all(keyword in name_lower for keyword in keywords):
+            return df
+
+    return None
+
+
+# Preprocess issue dates 
 def preprocess_issue_dates(df):
     df = df.copy()
 
@@ -11,29 +23,91 @@ def preprocess_issue_dates(df):
 
     return df
 
-#Calculating cycle time in days for each developer
+
+# Calculating cycle time 
 def calculate_cycle_time(df):
     df = preprocess_issue_dates(df)
 
+    if df.empty:
+        return 0
+
     cycle_times = (df["done_at"] - df["created_at"]).dt.days
+    result = cycle_times.mean()
 
-    return round(cycle_times.mean(), 2)
+    if pd.isna(result): 
+        return 0
 
-#Filtering data for a specific developer
-def get_developer_data(df, dev_id):
-    return df[df["developer_id"] == dev_id]
+    return round(result, 2)
 
 
-#Getting the team of a developer
-def get_developer_team(df, dev_id, team_column="team_name"):
-    team = df[df["developer_id"] == dev_id][team_column]
+# Filtering data for a specific developer
+def get_developer_data(df, dev_id, dev_column):
+    return df[df[dev_column] == dev_id]
 
-    if team.empty:
+
+# Getting team of developer 
+def get_developer_team(df, dev_id, dev_column="developer_id", team_column="team_name"):
+    result = df[df[dev_column] == dev_id]
+
+    if result.empty:
         return None
 
-    return team.iloc[0]
+    return result[team_column].iloc[0]
 
 
-#Filtering data for a specific team
+# Filtering data for a specific team
 def get_team_data(df, team, team_column="team_name"):
     return df[df[team_column] == team]
+
+
+# Calculating PR throughput 
+def calculate_pr_throughput(df):
+    if df.empty:
+        return 0
+
+    if "status" in df.columns:
+        return len(df[df["status"].fillna("").str.lower() == "merged"])
+
+    return len(df)
+
+
+# Average PR per developer in team 
+def calculate_team_pr_average(df, dev_column="developer_id"):
+    if df.empty:
+        return 0
+
+    total_prs = len(df)
+    unique_devs = df[dev_column].nunique()
+
+    if unique_devs == 0:
+        return 0
+
+    return round(total_prs / unique_devs, 2)
+
+
+# Unique developers in team
+def get_team_developers(df, team, team_column="team_name", dev_column="developer_id"):
+    return df[df[team_column] == team][dev_column].unique()
+
+#Lead Time 
+def calculate_lead_time(df):
+    if df.empty:
+        return 0
+
+    if "lead_time_days" not in df.columns:
+        return 0
+
+    result = df["lead_time_days"].mean()
+
+    if pd.isna(result):
+        return 0
+
+    return round(result, 2)
+#Dev Prs
+def get_developer_prs(df, dev_id, dev_column="developer_id"):
+    return df[df[dev_column] == dev_id]
+
+
+
+
+    

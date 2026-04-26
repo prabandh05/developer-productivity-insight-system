@@ -24,18 +24,18 @@
 ---
 
 ## Phase 4: Data Processing
-- [ ] Loaded Excel data using pandas
-- [ ] Parsed all required sheets
-- [ ] Converted date fields to correct format
+- [*] Loaded Excel data using pandas
+- [*] Parsed all required sheets
+- [*] Converted date fields to correct format
 
 ---
 
 ## Phase 5: Metric Implementation
-- [ ] Implemented Cycle Time calculation
-- [ ] Implemented Lead Time calculation
+- [*] Implemented Cycle Time calculation
+- [*] Implemented Lead Time calculation
 - [ ] Implemented Deployment Frequency
 - [ ] Implemented Bug Rate
-- [ ] Implemented PR Throughput
+- [*] Implemented PR Throughput
 
 ---
 
