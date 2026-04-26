@@ -65,17 +65,17 @@
 ---
 
 ## Phase 10: Frontend
-- [ ] Setup React application
-- [ ] Added developer selection UI
-- [ ] Integrated backend API
-- [ ] Displayed metrics, insights, and suggestions
+- [*] Setup React application
+- [*] Added developer selection UI
+- [*] Integrated backend API
+- [*] Displayed metrics, insights, and suggestions
 
 ---
 
 ## Phase 11: Testing
-- [ ] Verified functionality for multiple developers
-- [ ] Validated metric correctness
-- [ ] Checked UI for errors
+- [*] Verified functionality for multiple developers
+- [*] Validated metric correctness
+- [*] Checked UI for errors
 
 ---
 

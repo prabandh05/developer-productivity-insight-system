@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 
 from metrics import (
@@ -26,9 +27,22 @@ from insights import (
 )
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # allow all origins 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load data
 data = pd.read_excel("../data/input.xlsx", sheet_name=None)
+
+#Load Developers Data
+
+dev_df = get_sheet_by_keywords(data, ["developers"])
+dev_df = dev_df.dropna(subset=["developer_id"])
+
 
 # Load issues data
 issues_df = get_sheet_by_keywords(data, ["jira"])
@@ -49,6 +63,17 @@ bugs_df = bugs_df.dropna(subset=["developer_id"])
 @app.get("/")
 def home():
     return {"message": "API is running"}
+
+# Developer endpoint to get all developers
+@app.get("/developers")
+def get_developers():
+
+    if dev_df is None:
+        return {"error": "Developer data not found"}
+
+    devs = dev_df[["developer_id", "developer_name"]].dropna().drop_duplicates()
+
+    return devs.to_dict(orient="records")
 
 
 # Cycle Time API
