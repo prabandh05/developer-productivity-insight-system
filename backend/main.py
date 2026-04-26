@@ -12,12 +12,14 @@ from metrics import (
     get_team_developers,
     preprocess_issue_dates,
     get_developer_prs,
-    calculate_lead_time 
+    calculate_lead_time,
+    calculate_bug_rate
 )
 from insights import (
     cycle_time_insight,
     pr_throughput_insight,
-    lead_time_insight
+    lead_time_insight,
+    bug_rate_insight
 )
 
 app = FastAPI()
@@ -39,6 +41,11 @@ prs_df = prs_df.dropna(subset=["developer_id"])
 #Load deploy data 
 deploy_df = get_sheet_by_keywords(data, ["deployment"])
 deploy_df = deploy_df.dropna(subset=["lead_time_days"])
+
+#Load bug data
+bugs_df = get_sheet_by_keywords(data, ["bug"])
+bugs_df = bugs_df.dropna(subset=["developer_id"])
+
 
 
 
@@ -153,6 +160,43 @@ def get_lead_time(dev_id: str):
         "team": team,
         "developer_lead_time": dev_value,
         "team_lead_time": team_value,
+        "insight": insight["insight"],
+        "suggestion": insight["suggestion"]
+    }
+#bug rate api
+@app.get("/bug-rate")
+def get_bug_rate(dev_id: str):
+
+    if bugs_df is None or issues_df is None:
+        return {"error": "Required data not found"}
+
+    dev_bugs = get_developer_data(bugs_df, dev_id, "developer_id")
+    dev_issues = get_developer_data(issues_df, dev_id, "developer_id")
+
+    if dev_issues.empty:
+        return {"error": "No issue data for developer"}
+
+    dev_value = calculate_bug_rate(dev_bugs, dev_issues)
+
+    team = get_developer_team(issues_df, dev_id, "developer_id", "team_name")
+
+    if team is None:
+        return {"error": "Team not found"}
+
+    team_devs = get_team_developers(issues_df, team)
+
+    team_bugs = bugs_df[bugs_df["developer_id"].isin(team_devs)]
+    team_issues = issues_df[issues_df["developer_id"].isin(team_devs)]
+
+    team_value = calculate_bug_rate(team_bugs, team_issues)
+
+    insight = bug_rate_insight(dev_value, team_value)
+
+    return {
+        "developer_id": dev_id,
+        "team": team,
+        "developer_bug_rate": dev_value,
+        "team_bug_rate": team_value,
         "insight": insight["insight"],
         "suggestion": insight["suggestion"]
     }

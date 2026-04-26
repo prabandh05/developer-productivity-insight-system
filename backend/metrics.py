@@ -108,6 +108,20 @@ def get_developer_prs(df, dev_id, dev_column="developer_id"):
     return df[df[dev_column] == dev_id]
 
 
+#Bug rate
+def calculate_bug_rate(bugs_df, issues_df):
+    if issues_df.empty:
+        return 0
+
+    total_bugs = len(bugs_df)
+    total_issues = len(issues_df)
+
+    if total_issues == 0:
+        return 0
+
+    return round(total_bugs / total_issues, 3)
+
+
 
 
     

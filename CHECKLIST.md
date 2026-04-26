@@ -34,7 +34,7 @@
 - [*] Implemented Cycle Time calculation
 - [*] Implemented Lead Time calculation
 - [ ] Implemented Deployment Frequency
-- [ ] Implemented Bug Rate
+- [*] Implemented Bug Rate
 - [*] Implemented PR Throughput
 
 ---
