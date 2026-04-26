@@ -140,7 +140,9 @@ data/
   input.xlsx
 
 ---
+## User Journey
 
+![User Journey](Miro.jpg)
 ## How to Run
 
 ### Backend
