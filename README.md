@@ -147,11 +147,12 @@ data/
 
 ### Backend
 
-pip install -r requirements.txt  
+pip install -r requirements.txt 
+cd backend 
 uvicorn main:app --reload  
 
 ### Frontend
-
+cd frontend
 npm install  
 npm start  
 
