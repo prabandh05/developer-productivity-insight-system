@@ -33,34 +33,34 @@
 ## Phase 5: Metric Implementation
 - [*] Implemented Cycle Time calculation
 - [*] Implemented Lead Time calculation
-- [ ] Implemented Deployment Frequency
+- [*] Implemented Deployment Frequency
 - [*] Implemented Bug Rate
 - [*] Implemented PR Throughput
 
 ---
 
 ## Phase 6: Team Metrics
-- [ ] Calculated team averages for all metrics
+- [*] Calculated team averages for all metrics
 
 ---
 
 ## Phase 7: Developer Filtering
-- [ ] Implemented filtering by developer
-- [ ] Verified correct metric calculation per developer
+- [*] Implemented filtering by developer
+- [*] Verified correct metric calculation per developer
 
 ---
 
 ## Phase 8: Insight Generation
-- [ ] Designed rule-based logic for insights
-- [ ] Compared developer metrics with team averages
-- [ ] Added suggestions for each metric
+- [*] Designed rule-based logic for insights
+- [*] Compared developer metrics with team averages
+- [*] Added suggestions for each metric
 
 ---
 
 ## Phase 9: API Development
-- [ ] Created endpoint to fetch developer list
-- [ ] Created endpoint to fetch metrics and insights
-- [ ] Tested API responses
+- [*] Created endpoint to fetch developer list
+- [*] Created endpoint to fetch metrics and insights
+- [*] Tested API responses
 
 ---
 
